@@ -4,12 +4,15 @@ from tkinter.font import Font
 
 from Words import *
 
+WhitelistedKeys = ["\r", "\x08"]
+
 MaxRow = 5
 MaxButtons = 5
 letters = []
 labels = []
 
 Word = RNGWord()
+PWord = []
 
 root = Tk()
 style = ttk.Style()
@@ -22,13 +25,36 @@ root.grid_rowconfigure(0, weight=1)
 
 def OnTyped(Key: StringVar):
     global letters
+    global labels
+
+    if not Key.char.isalpha():
+        if not Key.char in WhitelistedKeys:
+            return
+
     print(Key)
+    print(labels)
     if Key.char == "\r":
         if len(letters) == 5:
-            for label, wordCharacter in zip(labels, Word):
+            print(labels)
+            for label, wordCharacter, number in zip(labels, Word, range(len(labels))):
+                print(label)
+                print(wordCharacter)
                 if label['text'] == wordCharacter:
                     label.configure(background="Green", highlightbackground="Green")
+
+                    if wordCharacter in Word:                       
+                        if Word[number]:
+                             PWord.insert(int(number), str(wordCharacter))
+                    else:
+                        PWord.insert(int(number), str(wordCharacter))
+
+            print(PWord)
             letters = []
+
+            for i in range(1, 6):
+                labels[5:]
+            
+            labels.sort(key=lambda label: label.cget("text"))
 
     # for letter in letters:
     #     print(letter)

@@ -1,7 +1,7 @@
 from random import choice
 
 Words = [
-    "APPLE",
+    "TRUST",
 ]
 
 def RNGWord():
