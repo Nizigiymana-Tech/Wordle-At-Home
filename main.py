@@ -13,7 +13,7 @@ MaxButtons = 5
 letters = []
 labels = []
 
-Word = RNGWord()
+Word = RNGWord() # noqa F405
 PWord = []
 
 root = Tk()  # noqa: F405
@@ -30,7 +30,7 @@ def OnTyped(Key):
     global labels
 
     if not Key.char.isalpha():
-        if not Key.char in WhitelistedKeys:
+        if not Key.char in WhitelistedKeys: # noqa F405
             return
 
     if Key.char == "\r":
