@@ -36,14 +36,22 @@ def OnTyped(Key):
     if Key.char == "\r":
         if len(letters) == 5:
             for label, wordCharacter, number in zip(labels, Word, range(len(labels))):
+                
                 if label['text'] == wordCharacter:
                     label.configure(background="Green", highlightbackground="Green")
 
-                    if wordCharacter in Word:                       
-                        if Word[number]:
-                             PWord.insert(int(number), str(wordCharacter))
-                    else:
+                    if wordCharacter in Word:
                         PWord.insert(int(number), str(wordCharacter))
+
+                    RealWord = "".join(PWord)
+                    print(RealWord)
+                    if RealWord.upper() == Word.upper():
+                        print("YES")
+                        root.destroy()
+                        return
+                    else:
+                        print("NO")
+                        RealWord = ""
 
             letters = []
 
